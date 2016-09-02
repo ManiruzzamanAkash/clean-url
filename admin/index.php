@@ -1,5 +1,9 @@
 <?php require_once '../config.php'; 
 
+/**
+ * Function : Generate a random password
+ * @return: string
+ **/
 function generate_random_string($length = 5){
     $characters = "123";
     $characters_length = strlen($characters);
@@ -10,26 +14,46 @@ function generate_random_string($length = 5){
     return $random_string;
 }
 ?>
+
+
 <?php
 if (isset($_POST['post_submit'])) {
     $post_title = $_POST['post_title'];
     $post_description = $_POST['post_description'];
 
+/***
+ * Make a dynamic url from the given post title.
+ * First-> trim the title, then replace the space by a hiphen (-)
+ * Then -> Make htmlentities for security
+ * Then -> Convert the title to lower case
+ **/
     $post_url = trim(str_replace(" ", "-", $post_title));
     $post_url = htmlentities($post_url);
     $post_url = strtolower($post_url);                  //final url
-    //echo 'Url is : '. $post_url;
+    
+    
+    
+    /**
+     * Now insert the post_id, post_title, post_description from admin panel and from background also insert the url
+     * in the database and for that we have to make obviously a field for url in the database
+    */
+    
     try {
         $statement = $db->prepare("SELECT post_url FROM tbl_post WHERE post_url = ?");
         $statement->execute(array($post_url));
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         
+        /**
+         * Check if the title is exists in the database..
+         * If the password exists in the database then add random string after the title which never make a same url_title 
+         * for my posts
+        **/
         if ($statement->rowCount() > 0) {
             $random_generate = generate_random_string();
             $post_url = $post_url.'-'.$random_generate;
         }
 
-
+        //And if no duplicate then only insert the url_title
         $statement = $db->prepare("INSERT INTO tbl_post(post_title, post_description, post_url) VALUES(?, ?, ?)");
         $statement->execute(array($post_title, $post_description, $post_url));
         $success_message = "Post has inserted successfully..";
