@@ -1,1 +1,47 @@
-RewriteEngin On
+Options +FollowSymlinks
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
+
+#RewriteRule ^/([^/]*)/([^/]*) \/post.php?post_id=$1&post_url=$2 [PT]
+#For showing without post.php
+RewriteRule ^([0-9]+)/([0-9a-zA-Z_-]+)$ post.php?post_id=$1&post_url=$2 [NC,L]
+
+
+#Simple redirects for index page
+#Thus you can make any redirect for any page like that,
+#Here, I've refirected all of the index pages written in format to home page,
+#You can redirect to any page
+RewriteRule ^index\.php http://localhost/All_demo/url_friendly/ [R=301,L]
+RewriteRule ^index\.html http://localhost/All_demo/url_friendly/ [R=301,L]
+RewriteRule ^index\.asp http://localhost/All_demo/url_friendly/ [R=301,L]
+RewriteRule ^index\.htm http://localhost/All_demo/url_friendly/ [R=301,L]
+RewriteRule ^index\.xml http://localhost/All_demo/url_friendly/ [R=301,L]
+
+
+
+
+#Redirect for any fake word
+RewriteRule ^$1 http://localhost/All_demo/url_friendly/404.php [L]
+
+#Secure htaccess file <----Remember to put every space and consider no space-->
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+#By this no one can see my htaccess code ---> For security
+
+
+#Get the redirect of all the unused error pages mainly for 404 error pages display
+ErrorDocument 404 http://localhost/All_demo/url_friendly/404.php
+#You can use any file here if someone enter a wrong url in your url bar. Here I have add 404.php page, You can redirect to any page in your site
+
+
+
+
+#------------------------------------------------------------------------------
+#For showing with post text
+#RewriteRule ^post([0-9]+)/([0-9a-zA-Z_-]+)$ post.php?post_id=$1&post_url=$2 [NC,L]
+#------------------------------------------------------------------------------
