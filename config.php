@@ -1,4 +1,10 @@
 <?php
+/**
+ * Simple database setup by mysql:PDO
+ * I think these all you know perfectly about creating a database
+ * I've just created an local site setup
+ **/
+ 
 $servername = "localhost";
 $username = "root";
 $password = "";
