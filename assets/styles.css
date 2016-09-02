@@ -1,0 +1,70 @@
+/* 
+    Created on : Aug 31, 2016, 4:37:32 PM
+    Author     : Maniruzzaman Akash
+*/
+body{
+    /*overflow: hidden;*/
+}
+
+.wrapper{
+    min-height: 900px;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+input {
+    padding: 10px;
+    margin: 10px 0px 10px 10px;
+}
+input[type="submit"] {
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid;
+    font-size: 18px;
+    font-weight: bold;
+}
+input[type="submit"]:hover {
+    background: #33ff33;
+}
+
+.success{
+    color: green;
+    font-weight: bold;
+    border: 1px solid green;
+    background: #99ff99;
+    border-radius: 20px;
+}
+.error{
+    color: green;
+    font-weight: bold;
+    border: 1px solid red;
+    background: #ffcccc;
+    border-radius: 20px;
+}
+
+.header{
+    padding: 20px;
+    text-align: center;
+    background: #99ff99;
+    color: #009900;
+}
+.post-area {
+    color: #000;
+}
+.single-post {
+    margin: 5px;
+    padding: 30px;
+    background: #fffbdc;
+    border-radius: 10px;
+}
+.post-detail-next{
+    background:transparent;
+    padding: 10px;
+    background:#fffbbd;
+    opacity: .5;
+
+}
+.post-detail-next:hover{
+    opacity: 1;
+}
+
+/***Ending styles.css ****/
